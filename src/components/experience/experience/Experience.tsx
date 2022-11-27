@@ -1,9 +1,14 @@
 import React from 'react';
-
+import { Canvas } from '@react-three/fiber';
+import { Keyboard } from '../index';
 const Experience = () => {
   return (
     <>
-      <h1>I am the Experience</h1>
+      <Canvas>
+        <mesh>
+          <Keyboard />
+        </mesh>
+      </Canvas>
     </>
   );
 };

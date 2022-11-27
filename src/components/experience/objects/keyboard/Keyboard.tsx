@@ -1,9 +1,20 @@
-import React, { useRef, useEffect, useContext, useState } from 'react';
+import React, {
+  KeyboardEvent,
+  useRef,
+  useEffect,
+  useContext,
+  useState,
+} from 'react';
 import { Text, useGLTF, useAnimations } from '@react-three/drei';
 import { animated } from '@react-spring/three';
 import { KeyboardContext } from '../../../../context';
 
-const Keyboard = ({ onHover, hover, ...props }) => {
+type propTypes = {
+  onHover?: (a: string) => void;
+  hover?: (a: string) => void;
+};
+
+const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
   const [text, setText] = useState('');
 
   const key = useContext(KeyboardContext);
@@ -15,7 +26,7 @@ const Keyboard = ({ onHover, hover, ...props }) => {
   const { nodes, materials, animations } = useGLTF('/keyboard.glb');
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       const keycode = e.code;
       const actualKey = e.key;
       if (keycode === 'Backspace') {
@@ -34,14 +45,15 @@ const Keyboard = ({ onHover, hover, ...props }) => {
         const nextLetter = text + actualKey;
         setText(nextLetter);
       }
-      if (key[`set${keycode}`]) {
-        key[`set${keycode}`](true);
+      if (key[`set${keycode}` as keyof typeof key]) {
+        const pressedKey = `set${keycode}`;
+        key[pressedKey: any](true);
       }
     };
 
     const handleKeyUp = (e) => {
       const keycode = e.code;
-      if (key[`set${keycode}`]) {
+      if (key[`set${keycode}` as keyof typeof key]) {
         key[`set${keycode}`](false);
       }
     };

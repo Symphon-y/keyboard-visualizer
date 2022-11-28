@@ -26,7 +26,7 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
   const { nodes, materials, animations } = useGLTF('/keyboard.glb');
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = (e: any) => {
       const keycode = e.code;
       const actualKey = e.key;
       if (keycode === 'Backspace') {
@@ -47,7 +47,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
       }
       if (key[`set${keycode}` as keyof typeof key]) {
         const pressedKey = `set${keycode}`;
-        key[pressedKey: any](true);
+        //TODO: fix this. (hardcoded, needs to be dynamic like line 58 if it were working)
+        key.setKeyA(true);
       }
     };
 
@@ -83,9 +84,9 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             material={materials.plate}
             position={[0.00134338, -0.01323594, -0.00115875]}
             userData={{ name: 'plate' }}
-            ref={meshRef}
-            onPointerOver={(e) => onHover(meshRef)}
-            onPointerOut={(e) => onHover(null)}
+            ref={meshRef};
+            onPointerOver={() => onHover?(meshRef): null}
+            onPointerOut={() => onHover?(null): null};
           />
           <group
             name='Cube020'
@@ -519,8 +520,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube' }}
-            onPointerOver={(e) => onHover(key.backquoteRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.backquoteRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyA'
@@ -533,8 +534,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.001' }}
-            onPointerOver={(e) => onHover(key.keyARef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyARef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyZ'
@@ -547,8 +548,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.002' }}
-            onPointerOver={(e) => onHover(key.keyZRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyZRef)}
+            onPointerOut={() => onHover?(null)}
           />
           {/* Tab intentionally left nonfunctional (it grabs iframe on press causing it to not rebound correctly) */}
           <animated.mesh
@@ -562,8 +563,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.003' }}
-            onPointerOver={(e) => onHover(key.key.tab)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.key.tab)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyQ'
@@ -576,8 +577,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.004' }}
-            onPointerOver={(e) => onHover(key.keyQRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyQRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='CapsLock'
@@ -590,8 +591,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.005' }}
-            onPointerOver={(e) => onHover(key.capsLockRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.capsLockRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='ShiftLeft'
@@ -604,8 +605,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.006' }}
-            onPointerOver={(e) => onHover(key.shiftLeftRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.shiftLeftRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Space'
@@ -618,8 +619,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.007' }}
-            onPointerOver={(e) => onHover(key.spaceRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.spaceRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='ControlLeft'
@@ -632,8 +633,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.008' }}
-            onPointerOver={(e) => onHover(key.controlLeftRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.controlLeftRef)}
+            onPointerOut={() => onHover?(null)}
           />
           {/* Meta (windows/apple/linux/super) intentionally left non functional */}
           <animated.mesh
@@ -658,8 +659,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.010' }}
-            onPointerOver={(e) => onHover(key.altLeftRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.altLeftRef)}
+            onPointerOut={() => onHover?(null)}
           />
           {/* The "Menu key" left non functional intentionally */}
           <animated.mesh
@@ -696,8 +697,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.013' }}
-            onPointerOver={(e) => onHover(key.altRightRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.altRightRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='ControlRight'
@@ -710,8 +711,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.014' }}
-            onPointerOver={(e) => onHover(key.controlRightRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.controlRightRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Backslash'
@@ -724,8 +725,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.015' }}
-            onPointerOver={(e) => onHover(key.backslashRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.backslashRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Backspace'
@@ -738,8 +739,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.016' }}
-            onPointerOver={(e) => onHover(key.backspaceRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.backspaceRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Enter'
@@ -752,8 +753,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.017' }}
-            onPointerOver={(e) => onHover(key.enterRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.enterRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='ShiftRight'
@@ -766,8 +767,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.018' }}
-            onPointerOver={(e) => onHover(key.shiftRightRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.shiftRightRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit1'
@@ -780,8 +781,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.039' }}
-            onPointerOver={(e) => onHover(key.digit1Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit1Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit2'
@@ -794,8 +795,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.040' }}
-            onPointerOver={(e) => onHover(key.digit2Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit2Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit3'
@@ -808,8 +809,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.041' }}
-            onPointerOver={(e) => onHover(key.digit3Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit3Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit4'
@@ -822,8 +823,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.042' }}
-            onPointerOver={(e) => onHover(key.digit4Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit4Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit5'
@@ -836,8 +837,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.043' }}
-            onPointerOver={(e) => onHover(key.digit5Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit5Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit6'
@@ -850,8 +851,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.044' }}
-            onPointerOver={(e) => onHover(key.digit6Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit6Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit7'
@@ -864,8 +865,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.045' }}
-            onPointerOver={(e) => onHover(key.digit7Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit7Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit8'
@@ -878,8 +879,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.046' }}
-            onPointerOver={(e) => onHover(key.digit8Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit8Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit9'
@@ -892,8 +893,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.047' }}
-            onPointerOver={(e) => onHover(key.digit9Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit9Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Digit0'
@@ -906,8 +907,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.048' }}
-            onPointerOver={(e) => onHover(key.digit0Ref)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.digit0Ref)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Minus'
@@ -920,8 +921,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.049' }}
-            onPointerOver={(e) => onHover(key.minusRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.minusRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Equal'
@@ -934,8 +935,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.050' }}
-            onPointerOver={(e) => onHover(key.equalRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.equalRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyS'
@@ -948,8 +949,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.051' }}
-            onPointerOver={(e) => onHover(key.keySRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keySRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyD'
@@ -962,8 +963,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.052' }}
-            onPointerOver={(e) => onHover(key.DRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.DRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyF'
@@ -976,8 +977,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.053' }}
-            onPointerOver={(e) => onHover(key.keyFRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyFRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyG'
@@ -990,8 +991,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.054' }}
-            onPointerOver={(e) => onHover(key.keyGRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyGRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyH'
@@ -1004,8 +1005,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.055' }}
-            onPointerOver={(e) => onHover(key.keyHRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyHRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyJ'
@@ -1018,8 +1019,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.056' }}
-            onPointerOver={(e) => onHover(key.keyJRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyJRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyK'
@@ -1032,8 +1033,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.057' }}
-            onPointerOver={(e) => onHover(key.keyKRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyKRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyL'
@@ -1046,8 +1047,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.058' }}
-            onPointerOver={(e) => onHover(key.keyLRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyLRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Semicolon'
@@ -1060,8 +1061,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.059' }}
-            onPointerOver={(e) => onHover(key.semicolonRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.semicolonRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Quote'
@@ -1074,8 +1075,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.060' }}
-            onPointerOver={(e) => onHover(key.quoteRef0)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.quoteRef0)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyX'
@@ -1088,8 +1089,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.061' }}
-            onPointerOver={(e) => onHover(key.keyXRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyXRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyC'
@@ -1102,8 +1103,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.062' }}
-            onPointerOver={(e) => onHover(key.keyCRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyCRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyV'
@@ -1116,8 +1117,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.063' }}
-            onPointerOver={(e) => onHover(key.keyVRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyVRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyB'
@@ -1130,8 +1131,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.064' }}
-            onPointerOver={(e) => onHover(key.keyBRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyBRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyN'
@@ -1144,8 +1145,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.065' }}
-            onPointerOver={(e) => onHover(key.keyNRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyNRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyM'
@@ -1158,8 +1159,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.066' }}
-            onPointerOver={(e) => onHover(key.keyMRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyMRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Comma'
@@ -1172,8 +1173,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.067' }}
-            onPointerOver={(e) => onHover(key.commaRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.commaRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Period'
@@ -1186,8 +1187,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.068' }}
-            onPointerOver={(e) => onHover(key.periodRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.periodRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='Slash'
@@ -1200,8 +1201,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.069' }}
-            onPointerOver={(e) => onHover(key.slashRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.slashRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyW'
@@ -1214,8 +1215,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.070' }}
-            onPointerOver={(e) => onHover(key.keyWRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyWRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyE'
@@ -1228,8 +1229,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.071' }}
-            onPointerOver={(e) => onHover(key.keyERef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyERef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyR'
@@ -1242,8 +1243,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.072' }}
-            onPointerOver={(e) => onHover(key.keyRRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyRRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyT'
@@ -1256,8 +1257,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.073' }}
-            onPointerOver={(e) => onHover(key.keyTRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyTRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyY'
@@ -1270,8 +1271,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.074' }}
-            onPointerOver={(e) => onHover(key.keyYRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyYRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyU'
@@ -1284,8 +1285,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.075' }}
-            onPointerOver={(e) => onHover(key.keyURef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyURef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyI'
@@ -1298,8 +1299,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.076' }}
-            onPointerOver={(e) => onHover(key.keyIRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyIRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyO'
@@ -1312,8 +1313,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.077' }}
-            onPointerOver={(e) => onHover(key.keyORef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyORef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='KeyP'
@@ -1326,8 +1327,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.078' }}
-            onPointerOver={(e) => onHover(key.keyPRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.keyPRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='BracketLeft'
@@ -1340,8 +1341,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.079' }}
-            onPointerOver={(e) => onHover(key.bracketLeftRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.bracketLeftRef)}
+            onPointerOut={() => onHover?(null)}
           />
           <animated.mesh
             name='BracketRight'
@@ -1354,8 +1355,8 @@ const Keyboard = ({ onHover, hover, ...props }: propTypes) => {
             rotation={[0.05235988, 0, 0]}
             scale={0.5}
             userData={{ name: 'Cube.080' }}
-            onPointerOver={(e) => onHover(key.bracketRightRef)}
-            onPointerOut={(e) => onHover(null)}
+            onPointerOver={() => onHover?(key.bracketRightRef)}
+            onPointerOut={() => onHover?(null)}
           />
         </group>
       </group>

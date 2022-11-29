@@ -3,9 +3,13 @@ import { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { animated } from '@react-spring/three';
 import useKeyboard, { Keys } from '../../../../hooks/useKeyboard';
+import { TextureLoader } from 'three';
 
 export default function Keyboard(props: any) {
   const group = useRef();
+
+  //TEST
+  const test = new TextureLoader().load('/Untitled-1.png');
 
   const { nodes, materials }: any = useGLTF('/models/keyboard_complex.glb');
 
@@ -485,7 +489,7 @@ export default function Keyboard(props: any) {
           rotation={[0.05235988, 0, 0]}
           scale={0.5}
           userData={{ name: 'Cube.001' }}>
-          <meshBasicMaterial color='red' opacity={0.85} />
+          <meshBasicMaterial transparent={true} color='red' opacity={0.85} />
         </animated.mesh>
         <animated.mesh
           {...getRefAndPosition(Keys.keyZ)}

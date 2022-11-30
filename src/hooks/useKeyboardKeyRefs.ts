@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 const useKeyboardKeyRefs = () => {
   //SECTION - Key Refs
+  const plateRef = useRef();
   const backquoteRef = useRef();
   const keyARef = useRef();
   const keyZRef = useRef();
@@ -62,6 +63,7 @@ const useKeyboardKeyRefs = () => {
   const bracketRightRef = useRef();
 
   return {
+    plateRef,
     backquoteRef,
     keyARef,
     keyZRef,

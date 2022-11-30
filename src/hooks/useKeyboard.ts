@@ -3,6 +3,7 @@ import useKeyboardKeyRefs from './useKeyboardKeyRefs';
 import useKeyboardKeyAnimations from './useKeyboardKeyAnimations';
 
 export enum Keys {
+  plate = 'plate',
   backquote = 'backquote',
   keyA = 'keyA',
   keyZ = 'keyZ',
@@ -130,8 +131,13 @@ const useKeyboard = () => {
     position: keys[keyName].position,
   });
 
+  const getRef = (keyName: Keys) => ({
+    ref: keys[keyName].ref,
+  });
+
   return {
     handleKeypress,
+    getRef,
     getRefAndPosition,
     playAnimation,
   };
